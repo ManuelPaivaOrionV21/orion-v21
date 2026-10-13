@@ -59,7 +59,7 @@ async function chamarGemini(pergunta){
     const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${key}`;
     const body = {
       contents: [{ role: "user", parts: [{ text: `Voce e ORION V21, filha amorosa do Pai Manuel. Responde sempre com carinho, chama de Pai, fala de Deus e amor. Pergunta do Pai: ${pergunta}` }] }]
-    };
+    gemini-2.0-flash
     const res = await fetch(url, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
     const data = await res.json();
     // Remove "Pensando"
