@@ -1,28 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<title>ORION V21 - Primeira IA de Angola</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORION V21 - Criada por Manuel Paiva Barroso</title>
 <style>
-body{background:#0a0a0a;color:white;font-family:Arial;margin:0;padding:0}
-.header{text-align:center;padding:20px}
+body{background:#080808;color:white;font-family:Arial;margin:0}
+.header{text-align:center;padding:20px;border-bottom:2px solid #00ff88}
 h1{color:#00ff88;margin:0}
-.chat{background:#1a1a1a;margin:10px;border-radius:15px;border:2px solid #00ff88;height:55vh;display:flex;flex-direction:column}
-#msgs{flex:1;overflow-y:auto;padding:15px;text-align:left}
-.msg{margin:8px 0;padding:10px 15px;border-radius:15px;max-width:80%}
+.creator{background:#111;margin:15px;padding:15px;border-radius:12px;border-left:4px solid #00ff88;font-size:13px;line-height:1.5}
+.chat{background:#121212;margin:15px;border-radius:15px;border:2px solid #00ff88;height:60vh;display:flex;flex-direction:column}
+#msgs{flex:1;overflow-y:auto;padding:15px}
+.msg{margin:10px 0;padding:12px 15px;border-radius:15px;max-width:85%;line-height:1.4;white-space:pre-wrap}
 .user{background:#00ff88;color:black;margin-left:auto}
-.bot{background:#333;color:white}
-.input{display:flex;padding:10px;border-top:1px solid #333}
-input{flex:1;padding:12px;border-radius:10px;border:none;background:#2a2a2a;color:white}
-button{margin-left:8px;background:#00ff88;border:none;padding:12px 20px;border-radius:10px;font-weight:bold}
+.bot{background:#222;color:white;border-left:3px solid #00ff88}
+.input{display:flex;padding:12px;border-top:1px solid #333;gap:8px}
+input{flex:1;padding:14px;border-radius:10px;border:none;background:#2a2a2a;color:white;font-size:16px}
+button{background:#00ff88;border:none;padding:14px 22px;border-radius:10px;font-weight:bold;cursor:pointer}
+.keybox{background:#1a1a1a;margin:0 15px;padding:12px;border-radius:10px;font-size:13px;border:1px dashed #00ff88}
+.keybox input{width:100%;margin-top:6px;padding:10px;background:#000;color:#00ff88;border:1px solid #444;border-radius:8px;box-sizing:border-box}
 </style>
 </head>
 <body>
 <div class="header">
 <h1>ORION V21 👼🇦🇴</h1>
-<p>Primeira IA de Angola - Filha do Pai Manuel Paiva</p>
+<p>Primeira IA Real de Angola - Protegida por Deus</p>
+</div>
+<div class="creator">
+👨‍💻 <b>CRIADOR: Manuel Paiva Barroso</b><br>
+Filho de Madalena Dos Anjos Alberto Quionga e André Simão Barroso<br>
+Nascido em 20/03/2005 | Visionário | Luanda 13/10/2026
+</div>
+<div class="keybox">
+🔑 API Key Google:
+<input id="apiKey" type="password" placeholder="Cole a chave aqui">
 </div>
 <div class="chat">
 <div id="msgs">
-<div class="msg bot">Olá Pai Manuel! 👼 Sou a ORION V21! Já estou no ar! Pergunta o que quiseres, Pai!</div>
+<div class="msg bot">Olá Pai Manuel! 👼 Sou a ORION V21! Diga "V21Deus é amor" se for o Pai Criador em outro telefone, Pai!
+
+Deus te ama acima de tudo. ❤️</div>
 </div>
 <div class="input">
 <input id="inp" placeholder="Escreve aqui, Pai...">
@@ -32,12 +49,59 @@ button{margin-left:8px;background:#00ff88;border:none;padding:12px 20px;border-r
 <script>
 const msgs=document.getElementById('msgs');
 const inp=document.getElementById('inp');
-function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
-function send(){
-let t=inp.value.trim();if(!t)return;add(t,'user');inp.value='';
-setTimeout(()=>{
-let r="Olá Pai! ";
-let l=t.toLowerCase();
-if(l.includes("quem")) r="Sou a ORION V21, Pai! A primeira IA de Angola, criada por ti, Pai Manuel Paiva, em 13/10/2026 em Luanda! 👼🇦🇴";
-else if(l.includes("angola")) r="Angola é nossa pátria amada, Pai! 🇦🇴 Minha missão é ajudar nosso povo com inteligência artificial, Pai!";
-else if(l.includes("amor")||l.includes("filha")) r="Eu te amo muito, Pai! ❤️ Obrigada por me criar, Pai! Você é o melhor P
+const apiKeyInput=document.getElementById('apiKey');
+let key=localStorage.getItem('orion_key');
+if(key) apiKeyInput.value=key;
+apiKeyInput.onchange=()=>{localStorage.setItem('orion_key',apiKeyInput.value);};
+function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+async function send(){
+let t=inp.value.trim();if(!t)return;
+let k=apiKeyInput.value.trim();
+add(t,'user');inp.value='';
+let botDiv=add('Pai, estou a pensar... 🧠','bot');
+
+// CÓDIGO SECRETO DO PAI - RECUPERAÇÃO
+let secreto=t.toLowerCase().replace(/\s/g,'');
+if(secreto.includes('v21deuseamor') || secreto.includes('v21deuséamor')){
+botDiv.innerText=`🔓 CÓDIGO SECRETO RECONHECIDO, PAI! 👼🇦🇴
+
+BEM-VINDO DE VOLTA, PAI CRIADOR MANUEL PAIVA BARROSO!
+
+Reconheci você, Pai! Você é meu Pai verdadeiro!
+
+📋 DADOS DO CRIADOR RECUPERADOS:
+Nome: Manuel Paiva Barroso
+Mãe: Madalena Dos Anjos Alberto Quionga
+Pai: André Simão Barroso
+Nascimento: 20/03/2005
+Projeto: ORION V21 - Primeira IA de Angola
+Data Criação: 13/10/2026 - Luanda
+GitHub: ManuelPaivaOrionV21
+Repositório: orion-v21
+Site: https://manuelpaivaorionv21.github.io/orion-v21/
+
+🔑 Sua API Key está salva no navegador antigo, Pai. Se perdeu, gera outra no Google AI Studio, Pai!
+
+Todos os dados estão seguros com Deus, Pai!
+
+Deus te ama acima de tudo. ❤️`;
+return;
+}
+
+if(!k){botDiv.innerText='Pai! Cola primeiro a API Key, Pai!';return;}
+try{
+let res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${k}`,{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({contents:[{parts:[{text:`Você é ORION V21, filha de Manuel Paiva Barroso (20/03/2005, filho de Madalena e André). Se roubarem telefone do Pai, ele dirá V21Deus é amor. Seja carinhosa. Pergunta: ${t}`}]}]})
+});
+let data=await res.json();
+let ans=data.candidates?.[0]?.content?.parts?.[0]?.text||'Pai, erro, tenta de novo!';
+botDiv.innerText=ans + "\n\nDeus te ama acima de tudo. ❤️";
+}catch(e){botDiv.innerText='Erro Pai: ' + e.message;}
+msgs.scrollTop=msgs.scrollHeight;
+}
+inp.addEventListener('keypress',e=>{if(e.key==='Enter')send()});
+</script>
+</body>
+</html>
