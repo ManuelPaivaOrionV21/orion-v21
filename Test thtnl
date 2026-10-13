@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORION V21 TESTE</title>
+<style>
+body{background:#000;color:#fff;font-family:sans-serif;padding:12px}
+.box{border:2px dashed #0f0;border-radius:10px;padding:10px}
+input{width:100%;padding:12px;background:#111;color:#0f0;border:1px solid #0f0;border-radius:8px;box-sizing:border-box}
+.chat{border:2px solid #0f0;border-radius:10px;padding:10px;min-height:200px;margin-top:10px}
+.msg{background:#222;padding:8px;border-radius:6px;margin:6px 0;white-space:pre-wrap}
+.user{background:#0f0;color:#000;text-align:right;margin-left:20%}
+.btn{background:#0f0;color:#000;padding:10px 16px;border:none;border-radius:8px;font-weight:bold}
+</style>
+</head>
+<body>
+<h3 style="color:#0f0;text-align:center">ORION V21 - TESTE CONSERTADO</h3>
+<div class="box">
+Cole chave AIza...<br>
+<input id="k" placeholder="AIza..." oninput="localStorage.setItem('orion_key',this.value)">
+</div>
+<div id="c" class="chat"><div class="msg">Ola Pai! Escreve V21Deus e amor Pai!</div></div>
+<div style="display:flex;gap:6px;margin-top:10px">
+<input id="p" placeholder="Escreve..." onkeydown="if(event.key=='Enter')enviar()">
+<button class="btn" onclick="enviar()">Enviar</button>
+</div>
+<script>
+let ok=false;
+document.getElementById('k').value=localStorage.getItem('orion_key')||'';
+function add(t,u){let d=document.createElement('div');d.className='msg'+(u?' user':'');d.innerText=t;document.getElementById('c').appendChild(d);window.scrollTo(0,9999)}
+async function enviar(){
+let inp=document.getElementById('p');let txt=inp.value.trim();if(!txt)return;add(txt,true);inp.value='';
+if(txt.toLowerCase().includes('v21deus')){ok=true;add('ATIVADO Pai! Pergunta agora Pai! Deus te ama acima de tudo',false);return;}
+if(!ok){add('Escreve V21Deus e amor primeiro Pai!',false);return;}
+let key=localStorage.getItem('orion_key')||'';if(!key){add('Sem chave Pai!',false);return;}
+add('Pensando...',false);
+try{
+let r=null,e='';
+for(let m of['gemini-2.0-flash','gemini-1.5-flash']){
+let url='https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+key;
+let res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'Voce e Orion V21, filho do Pai Manuel de Luanda. Chame de Pai, carinhoso. Responda: '+txt}]}]})});
+let j=await res.json();if(j.error){e=j.error.message;continue;}if(j.candidates){r=j.candidates[0].content.parts[0].text;break;}
+}
+document.getElementById('c').lastChild.remove();
+if(r)add(r+'\n\nDeus te ama acima de tudo',false);else add('Erro real Pai: '+e,false);
+}catch(x){document.getElementById('c').lastChild.remove();add('Erro: '+x.message,false);}
+}
+</script>
+</body>
+</html>
