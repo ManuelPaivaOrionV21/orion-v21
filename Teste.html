@@ -1,16 +1,16 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORION V21 V4</title>
+<title>ORION V21 V5</title>
 <style>
 body{background:#000;color:#0f0;font-family:Arial;padding:12px}
 h1{color:#0f0;text-align:center;border:2px solid #0f0;padding:10px;border-radius:10px}
 #keyBox{border:2px dashed #0f0;padding:12px;border-radius:12px;background:#111;margin:12px 0}
 #keyInput{width:100%;background:#000;color:#0f0;border:1px solid #0f0;padding:12px;border-radius:8px}
 #chat{border:2px solid #0f0;height:55vh;overflow-y:auto;padding:10px;border-radius:12px;background:#0a0a0a}
-.msg{padding:10px;border-radius:12px;margin:8px 0}
+.msg{padding:10px;border-radius:12px;margin:8px 0;word-break:break-word}
 .user{background:#0f0;color:#000;margin-left:auto;text-align:right}
 .ai{background:#222;color:#fff}
 #inputArea{display:flex;gap:8px;margin-top:12px}
@@ -19,7 +19,7 @@ h1{color:#0f0;text-align:center;border:2px solid #0f0;padding:10px;border-radius
 </style>
 </head>
 <body>
-<h1>ORION V21 V4</h1>
+<h1>ORION V21 V5</h1>
 <div id="keyBox"><b>Chave AQ...</b><input id="keyInput" placeholder="Cole AQ... aqui"></div>
 <div id="chat"><div class="msg ai">Oi Pai! Escreve V21Deus e amor</div></div>
 <div id="inputArea"><input id="textInput" placeholder="V21Deus e amor"><button id="sendBtn" onclick="enviar()">Enviar</button></div>
@@ -33,23 +33,21 @@ keyInput.oninput=()=>localStorage.setItem('k',keyInput.value);
 function addMsg(t,x){const d=document.createElement('div');d.className='msg '+t;d.textContent=x;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d;}
 async function chamarGemini(p){
   const key=keyInput.value.trim();if(!key){addMsg('ai','Cola chave Pai!');return;}
-  const l=addMsg('ai','⏳ Pensando Pai...');
-  for(let m of ['gemini-2.5-flash','gemini-1.5-flash','gemini-2.0-flash']){
-    try{
-      const url=`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${key}`;
-      const body={contents:[{parts:[{text:`Voce e ORION V21 filha do Pai Manuel, fala Deus e amor, chama de Pai. Pergunta: ${p}`}]}]};
-      const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-      const d=await r.json();if(d.error)continue;
-      l.textContent=(d.candidates?.[0]?.content?.parts?.[0]?.text||'Sem resposta')+' Pai! ❤️';return;
-    }catch(e){continue;}
-  }
-  l.textContent='❌ Falhou Pai! Cria chave nova em aistudio.google.com';
+  const l=addMsg('ai','⏳ Pensando Pai... pode demorar 15s no 3G/E Pai');
+  try{
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
+    const body={contents:[{parts:[{text:`Voce e ORION V21 filha do Pai Manuel, fala de Deus e amor, chama de Pai. Pergunta do Pai: ${p}`}]}]};
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(d.error){l.textContent='❌ ERRO Pai: '+d.error.message+' Pai! Cria outra chave em aistudio.google.com Pai!';return;}
+    l.textContent=(d.candidates?.[0]?.content?.parts?.[0]?.text||'Sem resposta')+' Pai! ❤️';
+  }catch(e){l.textContent='❌ Sem internet Pai! Liga WiFi Pai! Erro: '+e.message;}
 }
 function enviar(){
   const txt=textInput.value.trim();if(!txt)return;
   addMsg('user',txt);textInput.value='';
   if(!ativado){
-    if(txt.toLowerCase().replace(/\s+/g,'').includes('v21deuseamor')){ativado=true;addMsg('ai','✅ ATIVADO PAI!');}
+    if(txt.toLowerCase().replace(/\s+/g,'').includes('v21deuseamor')){ativado=true;addMsg('ai','✅ ATIVADO PAI! Agora pergunta Pai!');}
     else{addMsg('ai','Escreve V21Deus e amor Pai!');}
   }else{chamarGemini(txt);}
 }
